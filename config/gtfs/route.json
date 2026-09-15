@@ -3,7 +3,27 @@
     "use_route_short_name_for_route_id": true,
     "default_route_long_name_enabled": true,
     "direction_finder_enabled": true,
+    "trip_id_cleanup_regex": "(_merge_\\w+)",
+    "trip_id_clean_merged": true,
+    "trip_id_clean_merged_comment": "Not working at the moment because '_merge_' instead of '_merged_'",
     "trip_headsign_remove_via": true,
-    "trip_headsign_cleaners": [],
+    "trip_headsign_cleaners": [
+        {
+            "regex": "^Route\\s?\\w+\\s?-\\s?",
+            "ignore_case": true,
+            "comment": "Removes 'Route X - ' from the beginning of trip headsigns"
+        },
+        {
+            "regex": "((Day |Saturday |Weekday(s)? )?Regular( Outbound| Inbound)? Trip\\s*)",
+            "ignore_case": true,
+            "comment": "Removes 'Regular Trip' from trip headsigns"
+        },
+        {
+            "regex": "(Ridge town)",
+            "ignore_case": true,
+            "replacement": "Ridgetown",
+            "comment": "Cleans up 'Ridge town' -> 'Ridgetown' in trip headsigns"
+        }
+    ],
     "stop_name_cleaners": []
 }
